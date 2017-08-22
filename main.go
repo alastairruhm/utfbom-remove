@@ -17,6 +17,7 @@ func main() {
 
 	app := cli.NewApp()
 	app.Name = "utfbom-remove"
+	app.Version = "v1.0.0"
 	app.Usage = "detect and remove BOM in utf-8 encoding files"
 	app.Flags = []cli.Flag{
 		cli.BoolFlag{
