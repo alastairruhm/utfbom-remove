@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -13,49 +12,54 @@ import (
 )
 
 func main() {
+	var path string
+	var checkOnly bool
+
 	app := cli.NewApp()
 	app.Name = "utfbom-remove"
 	app.Usage = "detect and remove BOM in utf-8 encoding files"
+	app.Flags = []cli.Flag{
+		cli.BoolFlag{
+			Name:        "check-only",
+			Usage:       "dry-run mode",
+			Destination: &checkOnly,
+		},
+		cli.StringFlag{
+			Name:        "path",
+			Value:       ".",
+			Usage:       "the path to scan",
+			Destination: &path,
+		},
+	}
+
 	app.Action = func(c *cli.Context) error {
-		fmt.Println("boom! I say!")
+		absDir, err := filepath.Abs(path)
+		if err != nil {
+			fmt.Fprintf(c.App.Writer, "Error: %#v\n", err)
+			return cli.NewExitError("error in path "+path, 1)
+		}
+		if checkOnly {
+			files, err := ListFilesWithBOM(absDir)
+			if err != nil {
+				fmt.Println(err)
+				return err
+			}
+
+			for _, file := range files {
+				fmt.Println(file)
+			}
+		}
+		err = RemoveBomForFiles(path)
+		if err != nil {
+			return err
+		}
 		return nil
 	}
 
 	app.Run(os.Args)
 }
 
-func mainBack() {
-	checkOnly := flag.Bool("check", false, "only do files with BOM check")
-
-	flag.Parse()
-	fmt.Println()
-	if flag.NArg() == 0 {
-		flag.Usage()
-		os.Exit(1)
-	}
-	dir := flag.Args()[1]
-	absDir, err := filepath.Abs(dir)
-
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	fmt.Println(*checkOnly)
-	if *checkOnly {
-		files, err := ListFilesWithBOM(absDir)
-		fmt.Println(files)
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		for _, file := range files {
-			fmt.Println(file)
-		}
-	}
-
-}
-
-func RemoveUTFBOM(byteData []byte) ([]byte, error) {
+func RemoveUtfBom(byteData []byte) ([]byte, error) {
 
 	// just skip BOM
 	output, err := ioutil.ReadAll(utfbom.SkipOnly(bytes.NewReader(byteData)))
@@ -92,14 +96,61 @@ func IsRugular(path string) (bool, error) {
 func ListFilesWithBOM(path string) ([]string, error) {
 	fileList := []string{}
 	err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
+		if f.Name() == ".git" { // filter .git subdirectory
+			return filepath.SkipDir
+		}
 		isRegularFile, err := IsRugular(path)
 		if err != nil {
 			return err
 		}
-		if isRegularFile { // Is not regular file
-			fileList = append(fileList, path)
+		if isRegularFile { // regular file
+			data, err := ioutil.ReadFile(path)
+			if err != nil {
+				fmt.Println(err)
+				return err
+			}
+			output, err := RemoveUtfBom(data)
+			if err != nil {
+				fmt.Println(err)
+				return err
+			}
+			if bytes.Compare(output, data) != 0 {
+				fileList = append(fileList, path)
+			}
+
 		}
 		return nil
 	})
 	return fileList, err
+}
+
+func RemoveBomForFiles(path string) error {
+	err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
+		if f.Name() == ".git" { // filter .git subdirectory
+			return filepath.SkipDir
+		}
+		isRegularFile, err := IsRugular(path)
+		if err != nil {
+			return err
+		}
+		if isRegularFile { // regular file
+			data, err := ioutil.ReadFile(path)
+			if err != nil {
+				fmt.Println(err)
+				return err
+			}
+			output, err := RemoveUtfBom(data)
+			if err != nil {
+				fmt.Println(err)
+				return err
+			}
+			if bytes.Compare(output, data) != 0 {
+				err = ioutil.WriteFile(path, output, 0644)
+				return err
+			}
+
+		}
+		return nil
+	})
+	return err
 }
