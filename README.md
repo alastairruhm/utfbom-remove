@@ -1,5 +1,7 @@
 # utfbom-remove
 
+[![Build Status](https://travis-ci.org/alastairruhm/utfbom-remove.svg?branch=master)](https://travis-ci.org/alastairruhm/utfbom-remove)
+[![codecov](https://codecov.io/gh/alastairruhm/utfbom-remove/branch/master/graph/badge.svg)](https://codecov.io/gh/alastairruhm/utfbom-remove)
 [![BCH compliance](https://bettercodehub.com/edge/badge/alastairruhm/utfbom-remove?branch=master)](https://bettercodehub.com/)
 [![Go Walker](https://gowalker.org/api/v1/badge)](https://gowalker.org/github.com/alastairruhm/utfbom-remove)
 [![Go Report Card](https://goreportcard.com/badge/github.com/alastairruhm/utfbom-remove)](https://goreportcard.com/report/github.com/alastairruhm/utfbom-remove)
