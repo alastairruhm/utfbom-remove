@@ -1,0 +1,16 @@
+language: go
+go:
+- 1.8
+- 1.9
+script:
+- go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    recipients:
+    - alastairruhm@gmail.com
+  slack:
+    secure: YbB0WCdk2PYOTBnoR/XjgmgakeQQKGeya1fKiuem0jFhpPJNF9SvcfyvqDsrmCH0uNXMFr7WTRe8IUwf2DTZNaS6hv5xzIjL4osUA7qWELf5K01SAWv/at1JVTcXUEZCWgmIpzdNXmGVCoJPPiu4ijDswho+MgUqn4UsQh+aNyP3WJjsrebkZG4+GloT/oKrTwmrMfRTR6+9OAKzAii5iWQTOBCFhAcIR1y17mBrwGLm8EMSS0XItSSlqGIM+HRX/RqVqLmrmowMEIi6JG4tu+Q/L+BYxjoC0JyiDH75Wyis32NXs6lk28Uv5uG2hwQoQzOfIGTP8DWF2vouOIWb+Cf67bI+ZdnoqVB0TrOH05f2TfzGAOlpfCW+OZXmM/CZApddsRzbwcrOpojde39uyZSA9IHJ3SbavKsZoP0dFq2dbw3puZFARhjFNLXSrYRHmAoJ1oGa2T7cSsHKiJU9D9J1GdBlgo2AkppjChme++bOBOYSg9JfcX90oYiyoGasj/2P50fgL2bF8SeSeOpawBCPJXLPzUIqOSaeEyNtSLl0pt/LGZ62/WuEXo2k13c90DUuuxzkdqZK+uJ6qUq8nlionsGqAFxphYfEp665nJEU6G8YB2NwvQPxY29b0E7jp8IhXtw3AKsS3vl0H2xSzRMSC5OVSLiDJMI/2E5FO3k=

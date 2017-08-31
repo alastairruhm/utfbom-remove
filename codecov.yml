@@ -1,0 +1,32 @@
+codecov:
+  notify:
+    require_ci_to_pass: yes
+
+coverage:
+  round: down
+  precision: 2
+  status:
+    patch:
+      default:
+        target: 80%
+    project:
+      default:
+        target: 80%
+
+  notify:
+    slack:
+      default:
+        url: "https://hooks.slack.com/services/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"
+        threshold: 1%
+        only_pulls: false
+        branches: null
+        flags: null
+        paths: null
+
+comment:
+  layout: "header, diff, flags, files"
+  behavior: default
+  require_changes: false  # if true: only post the comment if coverage changes
+  require_base: no        # [yes :: must have a base report to post]
+  require_head: yes       # [yes :: must have a head report to post]
+  branches: null
