@@ -60,8 +60,8 @@ func main() {
 	app.Run(os.Args)
 }
 
+// RemoveUtfBom with given bytes
 func RemoveUtfBom(byteData []byte) ([]byte, error) {
-
 	// just skip BOM
 	output, err := ioutil.ReadAll(utfbom.SkipOnly(bytes.NewReader(byteData)))
 	if err != nil {
@@ -71,6 +71,7 @@ func RemoveUtfBom(byteData []byte) ([]byte, error) {
 	return output, nil
 }
 
+// IsDirectory ...
 func IsDirectory(path string) (bool, error) {
 	info, err := os.Stat(path)
 	if err != nil {
@@ -82,6 +83,7 @@ func IsDirectory(path string) (bool, error) {
 	return false, nil
 }
 
+// IsRugular returns true if the path given is a regular file
 func IsRugular(path string) (bool, error) {
 	info, err := os.Stat(path)
 	if err != nil {
@@ -100,58 +102,57 @@ func ListFilesWithBOM(path string) ([]string, error) {
 		if f.Name() == ".git" { // filter .git subdirectory
 			return filepath.SkipDir
 		}
-		isRegularFile, err := IsRugular(path)
+		b, _, err := DetectBom(path)
 		if err != nil {
 			return err
 		}
-		if isRegularFile { // regular file
-			data, err := ioutil.ReadFile(path)
-			if err != nil {
-				fmt.Println(err)
-				return err
-			}
-			output, err := RemoveUtfBom(data)
-			if err != nil {
-				fmt.Println(err)
-				return err
-			}
-			if bytes.Compare(output, data) != 0 {
-				fileList = append(fileList, path)
-			}
-
+		if b {
+			fileList = append(fileList, path)
+			return err
 		}
 		return nil
 	})
 	return fileList, err
 }
 
+// RemoveBomForFiles ...
 func RemoveBomForFiles(path string) error {
 	err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
 		if f.Name() == ".git" { // filter .git subdirectory
 			return filepath.SkipDir
 		}
-		isRegularFile, err := IsRugular(path)
+		b, output, err := DetectBom(path)
 		if err != nil {
 			return err
 		}
-		if isRegularFile { // regular file
-			data, err := ioutil.ReadFile(path)
-			if err != nil {
-				fmt.Println(err)
-				return err
-			}
-			output, err := RemoveUtfBom(data)
-			if err != nil {
-				fmt.Println(err)
-				return err
-			}
-			if bytes.Compare(output, data) != 0 {
-				err = ioutil.WriteFile(path, output, 0644)
-				return err
-			}
-
+		if b {
+			err = ioutil.WriteFile(path, output, 0644)
+			return err
 		}
 		return nil
 	})
 	return err
+}
+
+// DetectBom detect bom of file as the path
+// returns true and content of byte array as file after remove the bom
+func DetectBom(path string) (bool, []byte, error) {
+	isRegularFile, err := IsRugular(path)
+	if err != nil {
+		return false, nil, err
+	}
+	if isRegularFile { // regular file
+		data, err := ioutil.ReadFile(path)
+		if err != nil {
+			return false, nil, err
+		}
+		output, err := RemoveUtfBom(data)
+		if err != nil {
+			return false, nil, err
+		}
+		if bytes.Compare(output, data) != 0 {
+			return true, output, nil
+		}
+	}
+	return false, nil, nil
 }
