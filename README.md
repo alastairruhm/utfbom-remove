@@ -1,6 +1,7 @@
 # utfbom-remove
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/alastairruhm/utfbom-remove?branch=master)](https://bettercodehub.com/)
+[![Go Walker](https://gowalker.org/api/v1/badge)](https://gowalker.org/github.com/alastairruhm/utfbom-remove)
 
 detect and remove BOM in utf-8 encoding files
 
