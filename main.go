@@ -12,7 +12,14 @@ import (
 	"github.com/urfave/cli"
 )
 
-func main() {
+func init() {
+	cli.VersionPrinter = func(c *cli.Context) {
+		fmt.Fprintf(c.App.Writer, "version %s\n", c.App.Version)
+	}
+}
+
+// NewApp generate a new application instance
+func NewApp() cli.App {
 	var path string
 	var checkOnly bool
 
@@ -57,7 +64,11 @@ func main() {
 		}
 		return nil
 	}
+	return *app
+}
 
+func main() {
+	app := NewApp()
 	app.Run(os.Args)
 }
 
