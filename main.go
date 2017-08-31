@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/dimchansky/utfbom"
 	"github.com/urfave/cli"
@@ -99,7 +100,7 @@ func IsRugular(path string) (bool, error) {
 func ListFilesWithBOM(path string) ([]string, error) {
 	fileList := []string{}
 	err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
-		if f.Name() == ".git" { // filter .git subdirectory
+		if strings.Contains(path, ".git") { // filter .git subdirectory
 			return filepath.SkipDir
 		}
 		b, _, err := DetectBom(path)
@@ -118,7 +119,7 @@ func ListFilesWithBOM(path string) ([]string, error) {
 // RemoveBomForFiles ...
 func RemoveBomForFiles(path string) error {
 	err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
-		if f.Name() == ".git" { // filter .git subdirectory
+		if strings.Contains(path, ".git") { // filter .git subdirectory
 			return filepath.SkipDir
 		}
 		b, output, err := DetectBom(path)
