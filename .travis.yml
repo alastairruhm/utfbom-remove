@@ -4,13 +4,11 @@ go:
 - 1.9
 script:
 - go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
-
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
+- bash <(curl -s https://codecov.io/bash)
 notifications:
   email:
     recipients:
     - alastairruhm@gmail.com
   slack:
-    secure: YbB0WCdk2PYOTBnoR/XjgmgakeQQKGeya1fKiuem0jFhpPJNF9SvcfyvqDsrmCH0uNXMFr7WTRe8IUwf2DTZNaS6hv5xzIjL4osUA7qWELf5K01SAWv/at1JVTcXUEZCWgmIpzdNXmGVCoJPPiu4ijDswho+MgUqn4UsQh+aNyP3WJjsrebkZG4+GloT/oKrTwmrMfRTR6+9OAKzAii5iWQTOBCFhAcIR1y17mBrwGLm8EMSS0XItSSlqGIM+HRX/RqVqLmrmowMEIi6JG4tu+Q/L+BYxjoC0JyiDH75Wyis32NXs6lk28Uv5uG2hwQoQzOfIGTP8DWF2vouOIWb+Cf67bI+ZdnoqVB0TrOH05f2TfzGAOlpfCW+OZXmM/CZApddsRzbwcrOpojde39uyZSA9IHJ3SbavKsZoP0dFq2dbw3puZFARhjFNLXSrYRHmAoJ1oGa2T7cSsHKiJU9D9J1GdBlgo2AkppjChme++bOBOYSg9JfcX90oYiyoGasj/2P50fgL2bF8SeSeOpawBCPJXLPzUIqOSaeEyNtSLl0pt/LGZ62/WuEXo2k13c90DUuuxzkdqZK+uJ6qUq8nlionsGqAFxphYfEp665nJEU6G8YB2NwvQPxY29b0E7jp8IhXtw3AKsS3vl0H2xSzRMSC5OVSLiDJMI/2E5FO3k=
+    secure: CLC3S0Zpjh9J4Ro48BH5+bgBiB0qptvxRK9omN6yFsPTU3pHHpaLPMYf5bgY/hEcYWxF9f0cKpMRMTU9CMywUd2EP2OWwoZW+S9zEe/SCHvXaovG8KXw5TF9+aWyJV3H8cDjIUgLhoGTP0o3AGi7R/sQqhcVAplO8ZfhcpvGgs04ZjDW/ufvdcfmjL/frA7HmprUiiCPnOP2pFPRE43OAB1HXm+HlXiVHK8wfvg/tyRuxRkrtKFrIguUEhazqI8g+PtVSsabvvetygjGyo/KVg4vbsvp+tMoNqXp01DA7PqXmD5lIv1Djc1MswKutYFZGJf9yC2ZTuCs7D4/A6XSY/l1Tm4ewCxC747xMW8KQfaNxJpnm4X2mwCYV0L9iHGUbMZxd1TA0hwXNIpapQVv4NEc7ZAlvT49MBnh3adY3cyDLJ78UWdOuiG3Xdxdw8+8aHGVn2xg5gWNohMntDwUZWv22ilEWIUGu820MmvOEWkh3/aLEHr7ixziSYUjxmXsLoegCWUUHzFFbB5WsivNdjA08KSnPBfDlh3Tdfa0d78J8s98YOOa+m4W+15KTJim858rF8SW3/ga1pLQ0veAwszoVy8t8F07retGbZ1gZBis+FOFQbATHF/gtx1a6szgMFXiMgKJSBThK1DWK9rQXvXpjb/8PGBh5AGNn7bG3Tk=
