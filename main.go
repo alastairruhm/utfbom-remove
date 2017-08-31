@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/dimchansky/utfbom"
 	"github.com/urfave/cli"
@@ -26,6 +27,14 @@ func NewApp() cli.App {
 	app := cli.NewApp()
 	app.Name = "utfbom-remove"
 	app.Version = "v1.0.0"
+	app.Compiled = time.Now()
+	app.Authors = []cli.Author{
+		cli.Author{
+			Name:  "alastairruhm",
+			Email: "alastairruhm@gmail.com",
+		},
+	}
+	app.Copyright = "(c) 2017 alastairruhm"
 	app.Usage = "detect and remove BOM in utf-8 encoding files"
 	app.Flags = []cli.Flag{
 		cli.BoolFlag{
@@ -42,6 +51,9 @@ func NewApp() cli.App {
 	}
 
 	app.Action = func(c *cli.Context) error {
+		if c.NArg() == 0 { // show help info when no parameter given
+			cli.ShowAppHelp(c)
+		}
 		absDir, err := filepath.Abs(path)
 		if err != nil {
 			fmt.Fprintf(c.App.Writer, "Error: %#v\n", err)
@@ -55,7 +67,7 @@ func NewApp() cli.App {
 			}
 
 			for _, file := range files {
-				fmt.Println(file)
+				fmt.Fprintf(c.App.Writer, "%s\n", file)
 			}
 		}
 		err = RemoveBomForFiles(path)
