@@ -60,7 +60,7 @@ func main() {
 	app.Run(os.Args)
 }
 
-// RemoveUtfBom with given bytes
+// RemoveUtfBom remove the bom header with given bytes
 func RemoveUtfBom(byteData []byte) ([]byte, error) {
 	// just skip BOM
 	output, err := ioutil.ReadAll(utfbom.SkipOnly(bytes.NewReader(byteData)))
