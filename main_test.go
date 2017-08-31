@@ -18,7 +18,7 @@ func TestRemoveUtfBom(t *testing.T) {
 	for _, tt := range testCases {
 		result, err := RemoveUtfBom(tt.input)
 		if err != nil {
-			t.Errorf("%v", err)
+			t.Fatalf("%v", err)
 		}
 
 		if !reflect.DeepEqual(result, tt.expected) {
