@@ -17,6 +17,7 @@ install:
 - set PATH=%GOPATH%\bin;C:\go\bin;%PATH%
 - go version
 - go env
+- go get -v -t ./...
 
 
 build_script:
