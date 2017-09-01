@@ -1,0 +1,8 @@
+package: github.com/alastairruhm/utfbom-remove
+import:
+- package: github.com/dimchansky/utfbom
+- package: github.com/urfave/cli
+  version: ^1.20.0
+testImport:
+- package: github.com/termie/go-shutil
+- package: gopkg.in/check.v1
