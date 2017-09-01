@@ -95,18 +95,6 @@ func RemoveUtfBom(byteData []byte) ([]byte, error) {
 	return output, nil
 }
 
-// IsDirectory ...
-func IsDirectory(path string) (bool, error) {
-	info, err := os.Stat(path)
-	if err != nil {
-		return false, err
-	}
-	if info.IsDir() {
-		return true, nil
-	}
-	return false, nil
-}
-
 // IsRugular returns true if the path given is a regular file
 func IsRugular(path string) (bool, error) {
 	info, err := os.Stat(path)
