@@ -29,7 +29,7 @@ func NewApp() cli.App {
 	app.Version = "v1.0.0"
 	app.Compiled = time.Now()
 	app.Authors = []cli.Author{
-		cli.Author{
+		{
 			Name:  "alastairruhm",
 			Email: "alastairruhm@gmail.com",
 		},
@@ -93,18 +93,6 @@ func RemoveUtfBom(byteData []byte) ([]byte, error) {
 		return nil, err
 	}
 	return output, nil
-}
-
-// IsDirectory ...
-func IsDirectory(path string) (bool, error) {
-	info, err := os.Stat(path)
-	if err != nil {
-		return false, err
-	}
-	if info.IsDir() {
-		return true, nil
-	}
-	return false, nil
 }
 
 // IsRugular returns true if the path given is a regular file
