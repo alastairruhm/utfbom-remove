@@ -29,7 +29,7 @@ func NewApp() cli.App {
 	app.Version = "v1.0.0"
 	app.Compiled = time.Now()
 	app.Authors = []cli.Author{
-		cli.Author{
+		{
 			Name:  "alastairruhm",
 			Email: "alastairruhm@gmail.com",
 		},
