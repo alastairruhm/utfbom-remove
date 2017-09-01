@@ -1,7 +1,15 @@
 language: go
+
+osx_image: xcode8.3
+
 go:
 - 1.8
 - 1.9
+
+os:
+- linux
+- osx
+
 script:
 - go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
 after_success:
