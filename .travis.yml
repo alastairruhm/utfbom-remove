@@ -10,10 +10,24 @@ os:
 - linux
 - osx
 
+install:
+- go get -t ./...
+- go get github.com/golang/lint/golint
+# - go get github.com/FiloSottile/vendorcheck
+# Install gometalinter and certain linters
+- go get github.com/alecthomas/gometalinter
+- go get github.com/gordonklaus/ineffassign
+- go get golang.org/x/tools/cmd/goimports
+- go get github.com/tsenart/deadcode
+
 script:
+- gometalinter --disable-all -E vet -E gofmt -E ineffassign -E goimports -E deadcode --tests --vendor ./...
+# - vendorcheck ./...
 - go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
+
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+
 notifications:
   email:
     recipients:
