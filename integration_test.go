@@ -41,42 +41,17 @@ func (s *AppRunSuite) TestAppRunOutputVersion(c *C) {
 	c.Assert(output, Contains, s.app.Version)
 }
 
-// func TestAppRunPrintVersion(t *testing.T) {
-// 	app := NewApp()
-// 	buf := new(bytes.Buffer)
-// 	app.Writer = buf
-// 	err := app.Run([]string{"utfbom-remove", "-v"})
-// 	if err != nil {
-// 		t.Error(err)
-// 	}
-// 	output := buf.String()
-// 	t.Logf("output: %q\n", buf.Bytes())
-// 	if !strings.Contains(output, "1.0.0") {
-// 		t.Errorf("want version to contain %q, did not: \n%q", "0.1.0", output)
-// 	}
-// }
-
-// func TestAppRunCheckBom(t *testing.T) {
-// 	app := NewApp()
-// 	buf := new(bytes.Buffer)
-// 	app.Writer = buf
-// 	tmp, err := ioutil.TempDir("", "integration_test")
-
-// 	if err != nil {
-// 		t.Fatalf("ioutil.TempDir: %v", err)
-// 	}
-// 	defer os.RemoveAll(tmp)
-
-// 	err = app.Run([]string{"utfbom-remove", "--check-only", "--path", "."})
-// 	if err != nil {
-// 		t.Fatal(err)
-// 	}
-// 	output := buf.String()
-// 	t.Logf("output: %q\n", buf.Bytes())
-// 	if !strings.Contains(output, "1.0.0") {
-// 		t.Errorf("want version to contain %q, did not: \n%q", "0.1.0", output)
-// 	}
-// }
+func (s *AppRunSuite) TestAppRunCheckBom(c *C) {
+	buf := new(bytes.Buffer)
+	s.app.Writer = buf
+	caseDir := filepath.Join(s.dir, "test000")
+	err := s.app.Run([]string{"utfbom-remove", "--check-only", "--path", caseDir})
+	if err != nil {
+		c.Fatal(err)
+	}
+	output := buf.String()
+	c.Assert(output, Contains, "bom.txt")
+}
 
 // -----------------------------------------------------------------------
 // Equals checker.
