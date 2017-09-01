@@ -13,7 +13,7 @@ os:
 install:
 - go get -t ./...
 - go get github.com/golang/lint/golint
-# - go get github.com/FiloSottile/vendorcheck
+- go get github.com/FiloSottile/vendorcheck
 # Install gometalinter and certain linters
 - go get github.com/alecthomas/gometalinter
 - go get github.com/gordonklaus/ineffassign
@@ -22,7 +22,7 @@ install:
 
 script:
 - gometalinter --disable-all -E vet -E gofmt -E ineffassign -E goimports -E deadcode --tests --vendor ./...
-# - vendorcheck ./...
+- vendorcheck ./...
 - go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
 
 after_success:
