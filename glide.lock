@@ -1,0 +1,12 @@
+hash: 32df14142bd82d832c63ebbcc57c8205fb7158c441c27aed41faf2eff7841ea2
+updated: 2017-09-01T16:33:34.843201541+08:00
+imports:
+- name: github.com/dimchansky/utfbom
+  version: 6c6132ff69f0f6c088739067407b5d32c52e1d0f
+- name: github.com/urfave/cli
+  version: cfb38830724cc34fedffe9a2a29fb54fa9169cd1
+testImports:
+- name: github.com/termie/go-shutil
+  version: bcacb06fecaeec8dc42af03c87c6949f4a05c74c
+- name: gopkg.in/check.v1
+  version: 20d25e2804050c1cd24a7eea1e7a6447dd0e74ec

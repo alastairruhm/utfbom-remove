@@ -1,6 +1,7 @@
 # utfbom-remove
 
 [![Build Status](https://travis-ci.org/alastairruhm/utfbom-remove.svg?branch=master)](https://travis-ci.org/alastairruhm/utfbom-remove)
+[![Build status](https://ci.appveyor.com/api/projects/status/6lor56a2339hd8we?svg=true&passingText=windows%20build%20passing)](https://ci.appveyor.com/project/alastairruhm/utfbom-remove)
 [![codecov](https://codecov.io/gh/alastairruhm/utfbom-remove/branch/master/graph/badge.svg)](https://codecov.io/gh/alastairruhm/utfbom-remove)
 [![Go Walker](https://gowalker.org/api/v1/badge)](https://gowalker.org/github.com/alastairruhm/utfbom-remove)
 [![Go Report Card](https://goreportcard.com/badge/github.com/alastairruhm/utfbom-remove)](https://goreportcard.com/report/github.com/alastairruhm/utfbom-remove)

@@ -10,20 +10,23 @@ os:
 - linux
 - osx
 
-install:
-- go get -t ./...
+before_install:
 - go get github.com/golang/lint/golint
-# - go get github.com/FiloSottile/vendorcheck
+- go get github.com/FiloSottile/vendorcheck
 # Install gometalinter and certain linters
 - go get github.com/alecthomas/gometalinter
 - go get github.com/gordonklaus/ineffassign
 - go get golang.org/x/tools/cmd/goimports
 - go get github.com/tsenart/deadcode
+- go get github.com/Masterminds/glide
+
+install:
+- glide install -v
 
 script:
 - gometalinter --disable-all -E vet -E gofmt -E ineffassign -E goimports -E deadcode --tests --vendor ./...
-# - vendorcheck ./...
-- go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
+- vendorcheck ./...
+- go test -v -race -coverprofile=coverage.txt -covermode=atomic $(glide novendor)
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
