@@ -17,12 +17,11 @@ install:
 - set PATH=%GOPATH%\bin;C:\go\bin;%PATH%
 - go version
 - go env
-- go get github.com/Masterminds/glide
-- glide install -v
+- go get -v -t ./...
 
 
 build_script:
-- for /f "" %%G in ('go list github.com/alastairruhm/utfbom-remove/... ^| find /i /v "/vendor/"') do ( go test %%G & IF ERRORLEVEL == 1 EXIT 1)
+- go test -v -race ./...
 
 # to disable automatic tests
 test: off
