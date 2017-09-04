@@ -30,6 +30,7 @@ script:
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+- test -n "$TRAVIS_TAG" && curl -sL https://git.io/goreleaser | bash
 
 notifications:
   email:
