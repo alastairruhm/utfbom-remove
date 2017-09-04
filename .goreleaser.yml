@@ -12,7 +12,7 @@ build:
   ldflags: -s -w
 release:
   github:
-    owner: alstairruhm
+    owner: alastairruhm
     name: utfbom-remove
 # Archive customization
 archive:
