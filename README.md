@@ -57,7 +57,7 @@ COPYRIGHT:
 $ ./utfbom-remove --path=/path/to/directory --check-only
 
 # repalce with bom free header
-$ ./utfbom-remove --path=/path/to/directory --check-only
+$ ./utfbom-remove --path=/path/to/directory
 ```
 
 ### windows
@@ -67,7 +67,7 @@ $ ./utfbom-remove --path=/path/to/directory --check-only
 $ ./utfbom-remove.exe --path=/path/to/directory --check-only
 
 # repalce with bom free header
-$ ./utfbom-remove --path=/path/to/directory --check-only
+$ ./utfbom-remove.exe --path=/path/to/directory --check-only
 ```
 
 
