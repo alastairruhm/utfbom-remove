@@ -23,3 +23,42 @@ archive:
   files:
     - README.md
     - LICENSE
+
+brew:
+  github:
+    owner: alastairruhm
+    name: homebrew-tap
+
+  # Git author used to commit to the repository.
+  # Defaults are shown.
+  commit_author:
+    name: alastairruhm
+    email: alastairruhm@gmail.com
+
+  # Folder inside the repository to put the formula.
+  # Default is the root folder.
+  folder: Formula
+
+  # Caveats for the user of your binary.
+  # Default is empty.
+  caveats: ""
+
+  # Your app's homepage.
+  # Default is empty.
+  homepage: "https://github.com/alastairruhm/utfbom-remove"
+
+  # Your app's description.
+  # Default is empty.
+  description: "remove utf8 bom header of file"
+
+  # Packages your package depends on.
+  # dependencies:
+  #   - git
+  #   - zsh
+
+  # Packages that conflict with your package.
+  # conflicts:
+  #   - svn
+  #   - bash
+  install: |
+    bin.install "program"
