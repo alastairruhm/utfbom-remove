@@ -24,6 +24,7 @@ install:
 - glide install -v
 
 script:
+- gometalinter --install
 - gometalinter --disable-all -E vet -E gofmt -E ineffassign -E goimports -E deadcode --tests --vendor ./...
 - vendorcheck ./...
 - go test -v -race -coverprofile=coverage.txt -covermode=atomic $(glide novendor)
