@@ -61,4 +61,4 @@ brew:
   #   - svn
   #   - bash
   install: |
-    bin.install "program"
+    bin.install "utfbom-remove"
