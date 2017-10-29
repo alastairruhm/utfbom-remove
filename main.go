@@ -26,7 +26,7 @@ func NewApp() cli.App {
 
 	app := cli.NewApp()
 	app.Name = "utfbom-remove"
-	app.Version = "v1.0.0"
+	app.Version = "v1.0.2"
 	app.Compiled = time.Now()
 	app.Authors = []cli.Author{
 		{

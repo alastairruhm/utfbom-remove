@@ -19,7 +19,13 @@ detect and remove BOM in utf-8 encoding files
 
 https://github.com/alastairruhm/utfbom-remove/releases
 
-download binary according to your system
+Download binary according to your system and on macOS, you can install as 
+
+```
+brew tap alastairruhm/tap && brew install utfbom-remove
+```
+
+usage:
 
 ```bash
 
@@ -32,7 +38,7 @@ USAGE:
    main [global options] command [command options] [arguments...]
 
 VERSION:
-   v1.0.0
+   v1.0.2
 
 AUTHOR:
    alastairruhm <alastairruhm@gmail.com>
