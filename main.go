@@ -69,6 +69,7 @@ func NewApp() cli.App {
 			for _, file := range files {
 				fmt.Fprintf(c.App.Writer, "%s\n", file)
 			}
+			return nil
 		}
 		err = RemoveBomForFiles(path)
 		if err != nil {
